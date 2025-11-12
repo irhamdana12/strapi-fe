@@ -3,20 +3,12 @@ export const metadata = {
   description: "Page description",
 };
 
-import Hero from "@/components/hero-home";
-import BusinessCategories from "@/components/business-categories";
-import FeaturesPlanet from "@/components/features-planet";
-import LargeTestimonial from "@/components/large-testimonial";
-import Cta from "@/components/cta";
+import BlockRenderer from "@/components/blocks/BlockRenderer";
+import { getLandingPage } from "@/lib/strapi";
 
-export default function Home() {
-  return (
-    <>
-      <Hero />
-      <BusinessCategories />
-      <FeaturesPlanet />
-      <LargeTestimonial />
-      <Cta />
-    </>
-  );
+export default async function Home() {
+  const page = await getLandingPage();
+  if (!page) throw new Error("Landing page not found")
+  const blocks = page.data.blocks || [];
+  return <BlockRenderer blocks={blocks as any} />;
 }

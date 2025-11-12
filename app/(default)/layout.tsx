@@ -1,34 +1,30 @@
-"use client";
-
-import { useEffect } from "react";
-
-import AOS from "aos";
-import "aos/dist/aos.css";
-
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import AOSInit from "@/components/AOSInit";
+import { getGlobal } from "@/lib/strapi";
 
-export default function DefaultLayout({
+export default async function DefaultLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    AOS.init({
-      once: true,
-      disable: "phone",
-      duration: 700,
-      easing: "ease-out-cubic",
-    });
-  });
+  const global = await getGlobal();
+  const header = global.data.header;
+  const footer = global.data.footer;
 
   return (
     <>
-      <Header />
+      <AOSInit />
+      <Header 
+        logo={header?.logo} 
+        navItems={header?.navItems || []} 
+        cta={header?.cta}
+        loginLink={header?.loginLink}
+      />
 
-      <main className="grow">{children}</main>
+      <main className="grow pt-16">{children}</main>
 
-      <Footer border={true} />
+      <Footer border={true} text={footer?.text || undefined} navItems={footer?.navItems || []} socialLinks={footer?.socialLinks || []} />
     </>
   );
 }
