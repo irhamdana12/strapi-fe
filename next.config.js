@@ -5,17 +5,25 @@ const hostname = parsed.hostname;
 const port = parsed.port || undefined;
 const nextConfig = {
   images: {
+    domains: ["localhost"],
     remotePatterns: [
       {
         protocol: "http",
-        hostname,
-        port,
+        hostname: "localhost",
+        port: "1337",
+        pathname: "/uploads/**"
       },
       {
-        protocol: "https",
-        hostname,
-        port,
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
+        pathname: "/uploads/**"
       },
+      //       {
+      //   protocol: "https",
+      //   hostname: "your-strapi-domain.com", // Ganti dengan domain production
+      //   pathname: "/uploads/"
+      // },
     ],
   },
 };

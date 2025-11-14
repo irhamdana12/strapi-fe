@@ -22,103 +22,70 @@ export default function Header({ logo, navItems, cta, loginLink }: HeaderProps =
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-[#0b1730]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Left: Logo + Navigation */}
-          <div className="flex items-center gap-8 lg:gap-10">
-            {/* Logo */}
-            <div className="flex-shrink-0">
+    <header className="fixed top-5 z-50 w-full md:top-9">
+      <div className="mx-auto max-w-6xl px-8 sm:px-5">
+        <div className="relative flex h-18 items-center justify-between gap-3 rounded-2xl bg-white/90 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(var(--color-gray-100),var(--color-gray-200))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]">
+          {/* Left: Logo */}
+          
               {logo?.href ? (
-                <Link href={logo.href} className="flex items-center gap-2">
+                <Link href={logo.href} className="flex items-center gap-5">
                   {logo.image?.url ? (
-                    <span className="relative inline-block h-8 w-8 overflow-hidden">
+                    <span className="relative inline-block h-15 w-25 overflow-hidden">
                       <Image
                         src={logo.image.url.startsWith("/") ? `${getStrapiURL()}${logo.image.url}` : logo.image.url}
                         alt={logo.image.alternativeText || logo.label || "Logo"}
                         fill
-                        sizes="32px"
+                        sizes="20px"
                         className="object-contain"
                       />
                     </span>
                   ) : (
                     <Logo />
                   )}
-                  {logo.label ? <span className="text-lg font-semibold text-white">{logo.label}</span> : null}
                 </Link>
               ) : (
                 <Logo />
               )}
-            </div>
+            
+         
 
-            {/* Desktop Navigation */}
-            {Array.isArray(navItems) && navItems.length > 0 ? (
-              <nav className="hidden lg:flex lg:items-center lg:gap-1">
-                <ul className="flex items-center gap-1">
-                  {navItems
-                    .filter((item) => typeof item?.href === "string" && item.href.trim().length > 0)
-                    .map((item) => (
-                    <li key={item.id}>
-                      {item.isExternal ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
-                        >
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
-                        >
-                          {item.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
+          {/* Center: Desktop Navigation */}
+          {Array.isArray(navItems) && navItems.length > 0 ? (
+            <div className="hidden lg:flex justify-center col-start-2">
+              <nav className="flex items-center gap-9 lg:gap-9 xl:gap-8">
+                <ul className="flex items-center gap-2">
+                 {navItems
+  .filter((item) => typeof item?.href === "string" && item.href.trim().length > 0)
+  .map((item) => (
+    <li key={item.id}>
+      {item.isExternal ? (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noreferrer"
+          className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200"
+        >
+          {item.label}
+        </a>
+      ) : (
+        <Link
+          href={item.href}
+          className="px-4 py-2 text-sm font-medium text-gray-800 hover:text-blue-500 transition-colors duration-200"
+        >
+          {item.label}
+        </Link>
+      )}
+    </li>
+  ))}
                 </ul>
               </nav>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
 
           {/* Right: Search, Log in, CTA, Mobile Menu */}
-          <div className="flex items-center gap-4">
-            {/* Search Icon - Desktop */}
-            <button
-              type="button"
-              className="hidden lg:flex items-center justify-center w-8 h-8 text-white/80 hover:text-white transition-colors"
-              aria-label="Search"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-     
+          <div className="flex items-center gap-4 justify-end col-start-3">
 
-            {/* Log in Link - Desktop */}
-            {loginLink?.href && (
-              <div className="hidden lg:block">
-                  {loginLink.isExternal ? (
-                    <a
-                      href={loginLink.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-sm font-medium text-white/80 hover:text-white transition-colors"
-                    >
-                      {loginLink.label || "Log in"}
-                    </a>
-                  ) : (
-                    <Link
-                      href={loginLink.href}
-                      className="text-sm font-medium text-white/80 hover:text-white transition-colors"
-                    >
-                      {loginLink.label || "Log in"}
-                    </Link>
-                  )}
-                </div>
-              )}
+     
 
             {/* CTA Button - Desktop */}
             {cta?.href && (

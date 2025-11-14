@@ -1,7 +1,7 @@
 export type StrapiImage = {
   id: number;
-  documentId?: string;
-  alternativeText?: string | null;
+  documentId: string;
+  alternativeText: string ;
   url: string;
 };
 
@@ -11,7 +11,7 @@ export type NavItem = {
   label: string;
   isExternal: boolean;
   isButtonLink: boolean;
-  type: "LINK" | "PRIMARY" | "SECONDARY";
+  type: "PRIMARY" | "SECONDARY";
   };
 
 export type GlobalResponse = {
@@ -19,33 +19,43 @@ export type GlobalResponse = {
     id: number;
     title: string;
     description?: string;
-    banner?: unknown;
-    header?: {
+    banner: unknown;
+    header: {
       id: number;
       logo: {
         id: number;
         href: string;
         isExternal?: boolean;
         label: string;
-        image: StrapiImage | null;
-      } | null;
+        image: StrapiImage ;
+      };
       navItems: NavItem[];
       cta: NavItem[];
-      loginLink?: NavItem | null;
-    } | null;
-    footer?: {
+      loginLink?: NavItem;
+    };
+    footer: {
       id: number;
-      text?: string;
-      logo?: unknown;
+      label: string;
+      logo:
+      {
+        id: number;
+        href: string;
+        isExternal: boolean;
+        label: string;
+        text: string;
+        image: StrapiImage;
+       
+
+      };
       navItems?: NavItem[];
-      socialLinks?: Array<{
+      socialLinks: Array<{
         id: number;
         href: string;
         isExternal?: boolean;
         label: string;
-        image: StrapiImage | null;
+        image: StrapiImage ;
       }>; 
-    } | null;
+    };
   };
   meta: unknown;
 };
@@ -53,17 +63,25 @@ export type GlobalResponse = {
 export type LandingPageBlockHero = {
   __component: "blocks.hero";
   id: number;
-  heading?: string;
+  heading: string;
   text?: string;
-  image?: StrapiImage | null;
-  links?: NavItem[];
+  image?: StrapiImage;
+  links: NavItem[];
 };
 
-export type LandingPageBlockFaq = {
-  __component: "blocks.hero";
+export type LandingPageBlockFAQs = {
+  __component: "blocks.faqs";
   id: number;
   heading: string;
   text: string;
+  faqs: Array<{
+    id: number;
+    heading: string;
+    text: string;
+    key:string;
+
+
+  }>;
 };
 
 export type LandingPageBlockSectionHeading = {
@@ -71,18 +89,19 @@ export type LandingPageBlockSectionHeading = {
   id: number;
   subHeading?: string | null;
   heading?: string;
-  anchorLink?: string | null;
+  anchorLink: string;
 };
 
 export type LandingPageBlockCardGrid = {
   __component: "blocks.card-grid";
   id: number;
-  cards: Array<{
+  subHeading: string ;
+  card: Array<{
     id: number;
     heading: string;
     text?: string;
-    icon?: StrapiImage | null;
-    link?: NavItem | null;
+    image?: StrapiImage ;
+    link: NavItem ;
   }>;
 };
 
@@ -91,25 +110,45 @@ export type LandingPageBlockSolutions = {
   id: number;
   title: string;
   tabs: Array<{
-    id: number;
-    label: string;
-    heading: string;
-    text: string;
-    image: StrapiImage;
-    bullets: Array<{
+     id: number;
+     label: string;
+     text?: string;
+     key : string;
+     result_title: string;
+     image : StrapiImage | null;
+     bullets: Array<{
+       id: number;
+       text: string;
+     }>;
+    result: Array<{
       id: number;
       text: string;
     }>;
-    results: Array<{
-      id: number;
-      text: string;
-    }>;
-    result_title: string;
-    key: string;
 
   }>;
 
 }
+
+export type LandingPageBlockProduct = {
+  __component: "blocks.product";
+  id: number;
+  subHeading: string;
+  card: Array<{
+    id: number;
+    heading?: string;
+    text: string;
+    key: string;
+    image: StrapiImage ;
+    link: NavItem ;
+  }>;
+};
+
+export type LandingPageBlockContact = {
+  __component: "blocks.contact";
+  id: number;
+  heading: string;
+  link: NavItem;
+};
 
 export type LandingPageResponse = {
   data: {
@@ -122,6 +161,9 @@ export type LandingPageResponse = {
       | LandingPageBlockSectionHeading
       | LandingPageBlockCardGrid
       | LandingPageBlockSolutions
+      | LandingPageBlockProduct
+      | LandingPageBlockContact
+      
     >;
   };
   meta: unknown;

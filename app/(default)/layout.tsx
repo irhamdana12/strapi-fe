@@ -15,16 +15,24 @@ export default async function DefaultLayout({
   return (
     <>
       <AOSInit />
+      
+      {/* HEADER - Gunakan data dari header, bukan footer */}
       <Header 
-        logo={header?.logo} 
-        navItems={header?.navItems || []} 
-        cta={header?.cta}
-        loginLink={header?.loginLink}
+        logo={header.logo}  // ✅ PERBAIKI: header.logo bukan footer.logo
+        navItems={header.navItems}
+        loginLink={header.loginLink}
       />
 
-      <main className="grow pt-16">{children}</main>
+      <main className="grow pt-0">{children}</main>
 
-      <Footer border={true} text={footer?.text || undefined} navItems={footer?.navItems || []} socialLinks={footer?.socialLinks || []} />
+      {/* FOOTER - Gunakan data dari footer */}
+      <Footer
+        border={true} 
+        text={footer.text}
+        logo={footer.logo}  // ✅ BENAR: footer.logo
+        navItems={footer.navItems} 
+        socialLinks={footer.socialLinks} 
+      />
     </>
   );
 }
