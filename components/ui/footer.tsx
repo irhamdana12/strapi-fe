@@ -39,7 +39,7 @@ type FooterProps = {
 export default function Footer({ border = false, text, navItems, socialLinks, logo }: FooterProps) {
   const renderLogo = () => {
     // Jika ada logo dari Strapi, gunakan image dari Strapi
-    if (logo?.image?.url) {
+  
       const logoContent = (
         <span className="relative inline-block h-15 w-25 overflow-hidden">
           <Image
@@ -77,9 +77,7 @@ export default function Footer({ border = false, text, navItems, socialLinks, lo
         );
       }
       
-      // Jika logo tidak memiliki link, return logo saja
-      return logoContent;
-    }
+   
 
     // Fallback: Jika tidak ada logo dari Strapi, gunakan text label
     const fallbackContent = logo?.label ? (
