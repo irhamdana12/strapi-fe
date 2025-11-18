@@ -145,7 +145,7 @@ export default function Footer({ border = false, text, navItems, socialLinks, lo
           {/* 1st block */}
           <div className="space-y-2 sm:col-span-12 lg:col-span-4">
             {renderLogo()}
-            <div></div>
+          
            <div className="text-sm text-gray-600">
   {text || logo?.text }
 </div>
@@ -212,8 +212,15 @@ export default function Footer({ border = false, text, navItems, socialLinks, lo
                       )}
                     </li>
                   ))}
-              </ul>
+                   </ul>
+
+                 <div className="w-full text-right">
+  <h2 className="text-sm text-gray-600 whitespace-nowrap">
+  © 2025 Sakti Data Nusantara | All Rights reserved.
+</h2>
+</div>
             </div>
+            
           ) : null}
         </div>
       </div>

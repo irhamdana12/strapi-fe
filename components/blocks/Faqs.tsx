@@ -21,7 +21,7 @@ export function FAQs({ block }: { block: LandingPageBlockFAQs }) {
     <section className="bg-white py-20 md:py-28" id="faq">
       <div className="mx-auto max-w-4xl px-6 md:px-12">
         <div className="mb-12 text-center" data-aos="fade-up">
-          <h2 className="text-4xl font-bold text-[#0A2463] md:text-5xl">
+          <h2 className="mb-6 text-3xl font-bold text-[#0A2463] md:text-4xl">
             {block.heading || "FAQ Singkat"}
           </h2>
           <div className="mx-auto mt-6 h-1 w-20 bg-[#3E92CC]" />

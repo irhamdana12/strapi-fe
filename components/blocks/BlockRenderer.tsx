@@ -144,9 +144,9 @@ export default function BlockRenderer({ blocks }: { blocks: Block[] }) {
               >
                 <div className="mx-auto max-w-6xl px-4 sm:px-6 text-center">
                   {b.subHeading && (
-                    <h2 className="mb-8 text-center text-2xl font-bold text-blue-400">
+                    <h3 className="mb-6 text-3xl font-bold text-[#3b82f6] md:text-4xl">
                       {b.subHeading}
-                    </h2>
+                    </h3>
                   )}
                   {b.heading && (
                   <p
